@@ -1,0 +1,35 @@
+.button {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.start-button {
+  background-color: #3369aa;
+  color: #fff;
+}
+
+.pause-button {
+  background-color: red;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.restart-button {
+  background-color: #171b2e;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.reset-button {
+  background-color: white;
+  color: #454343;
+  border: 1px solid #454343;
+  margin-left: 10px;
+}
+
+.button:hover {
+  -webkit-box-shadow: 9px 6px 41px -15px rgba(0,0,0,1);
+  -moz-box-shadow: 9px 6px 41px -15px rgba(0,0,0,1);
+  box-shadow: 9px 6px 41px -15px rgba(0,0,0,1);
+}
