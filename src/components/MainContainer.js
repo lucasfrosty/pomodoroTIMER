@@ -1,17 +1,21 @@
 import React from 'react';
-import Timer from './Timer';
-import Button from './Button';
+import Clock from './Clock';
+import HeaderIcon from './HeaderIcon';
+import ButtonContainer from './ButtonContainer';
+import OrientationMsg from './OrientationMsg';
 
-const POMODORE_TIME = 1500;
+const POMODORO_TIME = 3;
 const REST_TIME = 300;
 const LAST_REST_TIME = 900;
+
+
 
 class MainContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: POMODORE_TIME,
-      pomodoreCounter: 0 // this state sets how many times a pomodore was done
+      time: POMODORO_TIME,
+      pomodoroCounter: 0 // this state sets how many times a pomodoro was done
     };
 
     // binding functions
@@ -19,17 +23,18 @@ class MainContainer extends React.Component {
     this.updateTimeEverySecond = this.updateTimeEverySecond.bind(this);
     this.restartTime = this.restartTime.bind(this);
     this.resetTime = this.resetTime.bind(this);
+    this.getPrimaryIcon = this.getPrimaryIcon.bind(this);
 
   }
 
-  // get the time of the next pomodore based on the current pomodore state
-  getTime = (pomodoreCounter) => {
-    // check if thats the last pomodore
-    if (pomodoreCounter === 7) {
+  // get the time of the next pomodoro based on the current pomodoro state
+  getTime = (pomodoroCounter) => {
+    // check if thats the last pomodoro
+    if (pomodoroCounter === 7) {
       return LAST_REST_TIME;
-    } // checks if the current pomodore is even or odd and sets the time based on that
-    else if (pomodoreCounter % 2 === 0) {
-      return POMODORE_TIME;
+    } // checks if the current pomodoro is even or odd and sets the time based on that
+    else if (pomodoroCounter % 2 === 0) {
+      return POMODORO_TIME;
     } else {
       return REST_TIME;
     }
@@ -38,10 +43,10 @@ class MainContainer extends React.Component {
   updateTime() {
     if (this.state.time === 0) { // entries the loop if the time is over
       this.setState({
-        time: this.getTime(this.state.pomodoreCounter + 1),
-        pomodoreCounter: (this.state.pomodoreCounter + 1) % 8
+        time: this.getTime(this.state.pomodoroCounter + 1),
+        pomodoroCounter: (this.state.pomodoroCounter + 1) % 8
 
-        /* was necessary to use pomodoreCounter + 1 here because the getTime
+        /* was necessary to use pomodoroCounter + 1 here because the getTime
         would've return the time based on the previous counter since i didn't
         incremented that yet */
 
@@ -59,33 +64,42 @@ class MainContainer extends React.Component {
 
   resetTime() {
     this.setState({
-      time: this.getTime(this.state.pomodoreCounter + 1),
-      pomodoreCounter: 0
+      time: POMODORO_TIME,
+      pomodoroCounter: 0
     });
+    this.pauseTime();
   }
 
   // the function restart the current time and pauses the clock.
   restartTime() {
     this.setState({
-      time: this.getTime(this.state.pomodoreCounter)
+      time: this.getTime(this.state.pomodoroCounter)
     });
     this.pauseTime();
   }
 
   pauseTime = () => clearInterval(this.timerID);
 
+  getPrimaryIcon() {
+    if (this.state.pomodoroCounter % 2 === 0) {
+      return 'code';
+    } else {
+      return 'coffee';
+    }
+  }
 
   render() {
+
     return (
       <div>
-        <Timer time={this.state.time}/>
-        <div>
-          <Button handleClick={this.updateTimeEverySecond} buttonClass="button start-button">Começar</Button>
-          <Button handleClick={this.pauseTime} buttonClass="button pause-button">Pausar</Button>
-          <Button handleClick={this.restartTime} buttonClass="button restart-button">Recomeçar</Button>
-          <Button handleClick={this.resetTime} buttonClass="button reset-button">Resetar</Button>
-        </div>
-        <h1>{this.state.pomodoreCounter} pomodores</h1>
+        <HeaderIcon pomodoroCounter={this.state.pomodoroCounter}/>
+        <Clock time={this.state.time}/>
+        <ButtonContainer updateTimeEverySecond={this.updateTimeEverySecond}
+          pauseTime={this.pauseTime}
+          restartTime={this.restartTime}
+          resetTime={this.resetTime}
+        />
+        <OrientationMsg pomodoroCounter={this.state.pomodoroCounter}/>
       </div>
     );
   }

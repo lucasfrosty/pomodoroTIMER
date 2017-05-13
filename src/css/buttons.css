@@ -1,0 +1,42 @@
+.button {
+  cursor: pointer;
+  font-size: .8rem;
+  padding: .85rem 2.13rem;
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+          border-radius: 2px;
+  border: 0;
+  margin: 6px;
+  white-space: normal !important;
+  word-wrap: break-word;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+
+.all-caps {
+  text-transform: uppercase; }
+
+.start-button {
+  background-color: #086fb9;
+  color: #fff; }
+
+.pause-button {
+  background-color: #C00;
+  color: #fff;
+  margin-left: 10px; }
+
+.restart-button {
+  background-color: #171b2e;
+  color: #fff;
+  margin-left: 10px; }
+
+.reset-button {
+  background-color: white;
+  color: #454343;
+  border: 1px solid #454343;
+  margin-left: 10px; }
+
+.button:hover {
+  -webkit-box-shadow: 9px 6px 41px -15px black;
+     -moz-box-shadow: 9px 6px 41px -15px black;
+          box-shadow: 9px 6px 41px -15px black; }

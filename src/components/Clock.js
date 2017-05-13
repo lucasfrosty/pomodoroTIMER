@@ -1,13 +1,15 @@
 import React from 'react';
+import '../css/clock.css';
 
-class Timer extends React.Component {
+class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.convertTime = this.convertTime.bind(this);
 
   }
 
-
+  /* recieve the time in seconds as a parameter and convert it to minutes and
+  seconds */
   convertTime(time) {
     let minutes = Math.floor(time / 60).toString();
     let seconds = (time - minutes * 60).toString();
@@ -19,16 +21,15 @@ class Timer extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
+  // TODO: Style the timer displayer
   render() {
     let timeInMinutes = this.convertTime(this.props.time);
 
     return (
-      <div>
-        <h2>{timeInMinutes}</h2>
-      </div>
+        <h2 className='clock'>{timeInMinutes}</h2>
     );
   }
 
 }
 
-export default Timer;
+export default Clock;
