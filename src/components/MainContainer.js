@@ -4,7 +4,7 @@ import HeaderIcon from './HeaderIcon';
 import ButtonContainer from './ButtonContainer';
 import OrientationMsg from './OrientationMsg';
 
-const POMODORO_TIME = 3;
+const POMODORO_TIME = 2500;
 const REST_TIME = 300;
 const LAST_REST_TIME = 900;
 
@@ -23,7 +23,6 @@ class MainContainer extends React.Component {
     this.updateTimeEverySecond = this.updateTimeEverySecond.bind(this);
     this.restartTime = this.restartTime.bind(this);
     this.resetTime = this.resetTime.bind(this);
-    this.getPrimaryIcon = this.getPrimaryIcon.bind(this);
 
   }
 
@@ -79,14 +78,6 @@ class MainContainer extends React.Component {
   }
 
   pauseTime = () => clearInterval(this.timerID);
-
-  getPrimaryIcon() {
-    if (this.state.pomodoroCounter % 2 === 0) {
-      return 'code';
-    } else {
-      return 'coffee';
-    }
-  }
 
   render() {
 
