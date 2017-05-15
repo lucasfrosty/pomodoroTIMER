@@ -7,7 +7,8 @@ class ButtonContainer extends React.Component {
   render() {
     return (
       <div>
-        <Button handleClick={this.props.updateTimeEverySecond} buttonClass="button all-caps start-button">
+        <Button handleClick={this.props.updateTimeEverySecond} 
+          buttonClass="button all-caps start-button">
           <FontAwesome name='play'/> Start
         </Button>
 
@@ -15,7 +16,7 @@ class ButtonContainer extends React.Component {
           <FontAwesome name='pause'/> Pause
         </Button>
 
-        <Button handleClick={this.props.restartTime} buttonClass="button all-caps restart-button">
+        <Button handleClick={this.props.refreshTime} buttonClass="button all-caps restart-button">
           <FontAwesome name='refresh'/> Refresh
         </Button>
 

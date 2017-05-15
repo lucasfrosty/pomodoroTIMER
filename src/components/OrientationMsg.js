@@ -13,7 +13,7 @@ class OrientationMsg extends React.Component {
     } else if (this.props.pomodoroCounter % 2 === 0) { // check if it's a even number
       return "Time to code, baby!!";
     } else {
-      return "Take a short break.";
+      return "Now, take a short break.";
     }
   }
 
@@ -21,9 +21,14 @@ class OrientationMsg extends React.Component {
   render() {
     let msg = this.setMessage();
 
+    /* this variable was necessary because the pomodoroCounter is actually
+    counting the pomodores and the rest that was done, so is necessary to
+    divide by 2 to get the actual amount of pomodores done */
+    let pomodorosDone = Math.round(this.props.pomodoroCounter/2);
+
     return (
       <div>
-        <h2>{this.props.pomodoroCounter} pomodoros done so far</h2>
+        <h2>{pomodorosDone} {pomodorosDone === 1 ? 'pomodoro' : 'pomodoros'} done so far</h2>
         <p>{msg}</p>
       </div>
     );
