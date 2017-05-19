@@ -11,7 +11,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 
 
-gulp.task('default', ['sass-compiler', 'yarn', 'watch']);
+gulp.task('default', ['sass-compiler', 'watch']);
 
 // Uglifies JS
 // gulp.task('uglifyjs', () => {
@@ -37,9 +37,9 @@ gulp.task('watch', () => {
   gulp.watch('src/sass/*.scss', ['sass-compiler']);
 });
 
-gulp.task('yarn', shell.task([
-  'yarn start'
-]));
+// gulp.task('yarn', shell.task([
+//   'yarn start'
+// ]));
 
 // Minify images
 gulp.task('images', () => {

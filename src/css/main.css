@@ -1,4 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+@media screen and (min-width: 320px) {
+  h2.clock {
+    font-size: 7em; } }
+
+@media screen and (min-width: 480px) {
+  h2.clock {
+    font-size: 8em; } }
+
+@media screen and (min-width: 767px) {
+  h2.clock {
+    font-size: 8.5em; } }
+
+@media screen and (min-width: 979px) {
+  h2.clock {
+    font-size: 10em; } }
+
 * {
   font-family: 'Roboto', sans-serif; }
 

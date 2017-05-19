@@ -22,8 +22,7 @@ class MainContainer extends React.Component {
   getTime = (pomodoroCounter) => {
     // check if thats the last pomodoro
     if (pomodoroCounter === 7) {
-      return // checks if the current pomodoro is even or odd and sets the time based on that
-      LAST_REST_TIME;
+      return LAST_REST_TIME;
     } else if (pomodoroCounter % 2 === 0) {
       return POMODORO_TIME;
     } else {
