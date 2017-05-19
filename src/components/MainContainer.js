@@ -4,8 +4,8 @@ import HeaderIcon from './HeaderIcon';
 import ButtonContainer from './ButtonContainer';
 import OrientationMsg from './OrientationMsg';
 
-const POMODORO_TIME = 5;
-const REST_TIME = 3;
+const POMODORO_TIME = 1500;
+const REST_TIME = 300;
 const LAST_REST_TIME = 900;
 
 class MainContainer extends React.Component {
