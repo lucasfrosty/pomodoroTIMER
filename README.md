@@ -1,13 +1,16 @@
-# pomodoroTIMER
+# pomoid
 This is an Pomodoro Timer React application made with `create-react-app`.
 If you don't know what is the Pomodoro technique check this [link](https://en.wikipedia.org/wiki/Pomodoro_Technique).
+
+## App running on heroku
+http://pomoid.herokuapp.com
 
 ## Getting started
 These instructions will get you a copy of the project up and running on your local machine
 
 First of all, clone the repository. On your terminal use:
 ```sh
-git clone https://github.com/lucasfrosty/pomodoroTIMER.git
+git clone https://github.com/lucasfrosty/pomoid.git
 ```
 
 ### Download the dependencies of the project:

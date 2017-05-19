@@ -8,8 +8,6 @@ const POMODORO_TIME = 5;
 const REST_TIME = 3;
 const LAST_REST_TIME = 900;
 
-
-
 class MainContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -18,24 +16,15 @@ class MainContainer extends React.Component {
       pomodoroCounter: 0, // this state sets how many times a pomodoro was done
       isRunning: false // state that sets if the clock is running or not
     };
-
-    // binding functions
-    // this.updateTime = this.updateTime.bind(this);
-    // this.refreshTime = this.refreshTime.bind(this);
-    // this.resetTime = this.resetTime.bind(this);
-    // this.pauseTime = this.pauseTime.bind(this);
-    // this.convertTime = this.convertTime.bind(this);
-    // this.updateTimeEverySecond = this.updateTimeEverySecond.bind(this);
-    // this.createNotification = this.createNotification.bind(this);
   }
 
   // this function get the time of the next pomodoro based on the current pomodoro state
   getTime = (pomodoroCounter) => {
     // check if thats the last pomodoro
     if (pomodoroCounter === 7) {
-      return LAST_REST_TIME;
-    } // checks if the current pomodoro is even or odd and sets the time based on that
-    else if (pomodoroCounter % 2 === 0) {
+      return // checks if the current pomodoro is even or odd and sets the time based on that
+      LAST_REST_TIME;
+    } else if (pomodoroCounter % 2 === 0) {
       return POMODORO_TIME;
     } else {
       return REST_TIME;
@@ -63,9 +52,7 @@ class MainContainer extends React.Component {
         time: this.state.time - 1
       });
       if (this.state.isRunning === false) {
-        this.setState({
-          isRunning: true
-        });
+        this.setState({isRunning: true});
       }
     }
   }
@@ -73,7 +60,7 @@ class MainContainer extends React.Component {
   /* this function will check if the clock is already running,
   in case is running, the updateTime function will not be called again */
   updateTimeEverySecond = () => {
-    if(this.state.isRunning) {
+    if (this.state.isRunning) {
       alert('The clock is running already');
     } else {
       this.timerID = setInterval(this.updateTime, 1000);
@@ -81,9 +68,7 @@ class MainContainer extends React.Component {
   }
 
   pauseTime = () => {
-    this.setState({
-      isRunning: false
-    });
+    this.setState({isRunning: false});
     clearInterval(this.timerID);
   }
 
@@ -96,10 +81,7 @@ class MainContainer extends React.Component {
   }
 
   resetTime = () => {
-    this.setState({
-      time: POMODORO_TIME,
-      pomodoroCounter: 0
-    });
+    this.setState({time: POMODORO_TIME, pomodoroCounter: 0});
     this.pauseTime();
   }
 
@@ -133,9 +115,13 @@ class MainContainer extends React.Component {
 
   createNotification = () => {
     let notificationSettings = {
-      title: 'pomodoroTIMER',
-      body: this.isWorkTime() ? "You have a 5 minutes break, you must not do anything about the work." : 'Your rest time is over, you have 25 minutes to do your stuffs. LET\'S CODE!!11',
-      icon: this.isWorkTime() ? 'https://maxcdn.icons8.com/Color/PNG/96/Transport/stop_sign-96.png' : 'https://maxcdn.icons8.com/Color/PNG/96/Transport/go-96.png'
+      title: 'pomoid',
+      body: this.isWorkTime()
+        ? "You have a 5 minutes break, you must not do anything about the work."
+        : 'Your rest time is over, you have 25 minutes to do your stuffs. LET\'S CODE!!11',
+      icon: this.isWorkTime()
+        ? 'https://maxcdn.icons8.com/Color/PNG/96/Transport/stop_sign-96.png'
+        : 'https://maxcdn.icons8.com/Color/PNG/96/Transport/go-96.png'
     }
 
     new Notification(notificationSettings.title, {
@@ -164,19 +150,14 @@ class MainContainer extends React.Component {
   render() {
     let timeInMinutes = this.convertTime(this.state.time);
 
-    // setting the page title to 'MM:SS - pomodoroTIMER'
-    this.setPageTitle(timeInMinutes + ' - pomodoroTIMER');
+    // setting the page title to 'MM:SS - pomoid'
+    this.setPageTitle(timeInMinutes + ' - pomoid');
 
     return (
       <div>
         <HeaderIcon pomodoroCounter={this.state.pomodoroCounter}/>
         <Clock>{timeInMinutes}</Clock>
-        <ButtonContainer updateTimeEverySecond={this.updateTimeEverySecond}
-          pauseTime={this.pauseTime}
-          refreshTime={this.refreshTime}
-          resetTime={this.resetTime}
-          isRunning={this.state.isRunning}
-        />
+        <ButtonContainer updateTimeEverySecond={this.updateTimeEverySecond} pauseTime={this.pauseTime} refreshTime={this.refreshTime} resetTime={this.resetTime} isRunning={this.state.isRunning}/>
         <OrientationMsg pomodoroCounter={this.state.pomodoroCounter}/>
       </div>
     );
