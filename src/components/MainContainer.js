@@ -73,7 +73,7 @@ class MainContainer extends React.Component {
   }
 
   // the function restart the current time and pauses the clock.
-  refreshTime() {
+  refreshTime = () => {
     this.setState({
       time: this.getTime(this.state.pomodoroCounter)
     });
