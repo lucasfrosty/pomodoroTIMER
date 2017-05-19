@@ -26,10 +26,11 @@ class OrientationMsg extends React.Component {
     divide by 2 to get the actual amount of pomodores done */
     let pomodorosDone = Math.round(this.props.pomodoroCounter/2);
 
+    // TODO: style this shit
     return (
       <div>
-        <h2>{pomodorosDone} {pomodorosDone === 1 ? 'pomodoro' : 'pomodoros'} done so far</h2>
-        <p>{msg}</p>
+        <h2 style={{marginBottom: 0}} >{msg}</h2>
+        <p style={{marginTop: 0}}>{pomodorosDone} {pomodorosDone === 1 ? 'pomodoro' : 'pomodoros'} done so far</p>
       </div>
     );
   }

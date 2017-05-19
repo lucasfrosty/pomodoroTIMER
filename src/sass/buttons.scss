@@ -17,18 +17,27 @@
 .start-button {
   background-color: #086fb9;
   color: #fff;
+  &:hover {
+    background-color: darken(#086fb9, 5%);
+  }
 }
 
 .pause-button {
   background-color: #C00;
   color: #fff;
   margin-left: 10px;
+  &:hover {
+    background-color: darken(#C00, 5%);
+  }
 }
 
 .restart-button {
   background-color: #171b2e;
   color: #fff;
   margin-left: 10px;
+  &:hover {
+    background-color: darken(#171b2e, 5%);
+  }
 }
 
 .reset-button {
@@ -36,6 +45,9 @@
   color: #454343;
   border: 1px solid #454343;
   margin-left: 10px;
+  &:hover {
+    background-color: darken(white, 5%);
+  }
 }
 
 .button:hover {

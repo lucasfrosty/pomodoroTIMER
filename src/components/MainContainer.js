@@ -14,23 +14,22 @@ class MainContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: POMODORO_TIME,
+      time: POMODORO_TIME, // state that sets the time (in a brute integer number that will be converted to MM:SS later)
       pomodoroCounter: 0, // this state sets how many times a pomodoro was done
-      isRunning: false
+      isRunning: false // state that sets if the clock is running or not
     };
 
     // binding functions
-    this.updateTime = this.updateTime.bind(this);
-    this.refreshTime = this.refreshTime.bind(this);
-    this.resetTime = this.resetTime.bind(this);
-    this.pauseTime = this.pauseTime.bind(this);
-    this.convertTime = this.convertTime.bind(this);
-    this.updateTimeEverySecond = this.updateTimeEverySecond.bind(this);
-    this.creatingNotification = this.creatingNotification.bind(this);
-
+    // this.updateTime = this.updateTime.bind(this);
+    // this.refreshTime = this.refreshTime.bind(this);
+    // this.resetTime = this.resetTime.bind(this);
+    // this.pauseTime = this.pauseTime.bind(this);
+    // this.convertTime = this.convertTime.bind(this);
+    // this.updateTimeEverySecond = this.updateTimeEverySecond.bind(this);
+    // this.createNotification = this.createNotification.bind(this);
   }
 
-  // get the time of the next pomodoro based on the current pomodoro state
+  // this function get the time of the next pomodoro based on the current pomodoro state
   getTime = (pomodoroCounter) => {
     // check if thats the last pomodoro
     if (pomodoroCounter === 7) {
@@ -43,8 +42,13 @@ class MainContainer extends React.Component {
     }
   }
 
-  updateTime() {
-    if (this.state.time === 0) { // entries the loop if the time is over
+  updateTime = () => {
+    if (this.state.time === 0) {
+      /* this block of code will do everything that's need to be done when the
+      time is over: send the notification, pass to the other state and pause the time */
+      this.playSound();
+      this.sendNotification();
+
       this.setState({
         /* was necessary to use pomodoroCounter + 1 here because the getTime
         would've return the time based on the previous counter since i didn't
@@ -54,6 +58,7 @@ class MainContainer extends React.Component {
       });
       this.pauseTime();
     } else {
+      // if the time is not over, just drecrement 1s of the time
       this.setState({
         time: this.state.time - 1
       });
@@ -65,9 +70,9 @@ class MainContainer extends React.Component {
     }
   }
 
-  updateTimeEverySecond() {
-    /* this function will check if the clock is already running,
-    in case is running, the updateTimeEverySecond function will not be called again */
+  /* this function will check if the clock is already running,
+  in case is running, the updateTime function will not be called again */
+  updateTimeEverySecond = () => {
     if(this.state.isRunning) {
       alert('The clock is running already');
     } else {
@@ -75,11 +80,10 @@ class MainContainer extends React.Component {
     }
   }
 
-  pauseTime () {
+  pauseTime = () => {
     this.setState({
       isRunning: false
     });
-    console.log('pausei');
     clearInterval(this.timerID);
   }
 
@@ -91,7 +95,7 @@ class MainContainer extends React.Component {
     this.pauseTime();
   }
 
-  resetTime() {
+  resetTime = () => {
     this.setState({
       time: POMODORO_TIME,
       pomodoroCounter: 0
@@ -99,9 +103,9 @@ class MainContainer extends React.Component {
     this.pauseTime();
   }
 
-  /* recieve the time in seconds as a parameter and convert it to minutes and
-  seconds */
-  convertTime(time) {
+  /* this function recieve the time in seconds as a parameter and convert
+  it to minutes and seconds */
+  convertTime = (time) => {
     let minutes = Math.floor(time / 60).toString();
     let seconds = (time - minutes * 60).toString();
 
@@ -118,20 +122,19 @@ class MainContainer extends React.Component {
     }
   }
 
-  playSound() {
-    /* i'm using the sound on a base64 data URI, so i chose to pass the data uri
-    as props because the string was really huge */
+  /* this function is using the sound on a base64 data URI, so i chose to pass the data uri
+  as props because the string was really huge */
+  playSound = () => {
     let audio = new Audio(this.props.base64url);
     audio.play();
   }
 
   isWorkTime = () => !this.state.pomodoroCounter % 2;
 
-  creatingNotification () {
-
+  createNotification = () => {
     let notificationSettings = {
-      title: this.isWorkTime() ? 'STOP CODING!' : "LET'SS CODE!!11",
-      body: this.isWorkTime() ? "You have a 5 minutes break, you must not do anything about the work." : 'Your rest time is over, you have 25 minutes to do your stuffs. Try to not get distracted and focus on your work.',
+      title: 'pomodoroTIMER',
+      body: this.isWorkTime() ? "You have a 5 minutes break, you must not do anything about the work." : 'Your rest time is over, you have 25 minutes to do your stuffs. LET\'S CODE!!11',
       icon: this.isWorkTime() ? 'https://maxcdn.icons8.com/Color/PNG/96/Transport/stop_sign-96.png' : 'https://maxcdn.icons8.com/Color/PNG/96/Transport/go-96.png'
     }
 
@@ -142,17 +145,17 @@ class MainContainer extends React.Component {
   }
 
   // code get from mozilla official documentation
-  sendNotification() {
+  sendNotification = () => {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") { // notification permissions have already been granted
-      this.creatingNotification();
+      this.createNotification();
     } else if (Notification.permission !== 'denied') { // Otherwise, we need to ask the user for permission
       Notification.requestPermission((permission) => {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          this.creatingNotification();
+          this.createNotification();
         }
       });
     }
@@ -161,13 +164,7 @@ class MainContainer extends React.Component {
   render() {
     let timeInMinutes = this.convertTime(this.state.time);
 
-    // sending notification if the time is over.
-    if (this.state.time === 0) {
-      this.playSound();
-      this.sendNotification();
-    }
-
-    // setting the page time to 'MM:SS - pomodoroTIMER'
+    // setting the page title to 'MM:SS - pomodoroTIMER'
     this.setPageTitle(timeInMinutes + ' - pomodoroTIMER');
 
     return (
