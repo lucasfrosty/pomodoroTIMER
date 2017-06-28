@@ -4,6 +4,7 @@ If you don't know what is the Pomodoro technique check this [link](https://en.wi
 
 ## App running on heroku
 http://pomoid.herokuapp.com
+<br><br>
 
 ## Getting started
 These instructions will get you a copy of the project up and running on your local machine
@@ -12,15 +13,15 @@ First of all, clone the repository. On your terminal use:
 ```sh
 git clone https://github.com/lucasfrosty/pomoid.git
 ```
-
 <br>
+
 ### Download the dependencies of the project:
 In your terminal, run:
 ```sh
 npm install
 ```
-
 <br>
+
 ### Running the app:
 Using npm:
 ```sh
