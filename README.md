@@ -14,13 +14,9 @@ git clone https://github.com/lucasfrosty/pomoid.git
 ```
 
 ### Download the dependencies of the project:
-If you use npm, run:
+In your terminal, run:
 ```sh
 npm install
-```
-If you use yarn, run:
-```sh
-yarn
 ```
 
 <br><br>
@@ -28,10 +24,6 @@ yarn
 Using npm:
 ```sh
 npm start
-```
-or using yarn:
-```sh
-yarn start
 ```
 or using gulp:
 ```

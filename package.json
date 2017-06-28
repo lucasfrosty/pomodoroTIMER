@@ -16,7 +16,7 @@
     "gulp-postcss": "^6.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-shell": "^0.6.3",
-    "react-scripts": "0.9.5"
+    "react-scripts": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
